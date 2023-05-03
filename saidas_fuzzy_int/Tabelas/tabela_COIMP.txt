@@ -1,0 +1,33 @@
+\begin{footnotesize}
+\begin{table*}[ht]
+\centering
+\footnotesize
+\caption{Evolution of superposition quantum registers in modelling quantum circuit: $A_I \cap B_I$}
+\label{tab:x}
+\begin{tabular}{l|l|l|l|l|l}
+\hline\noalign{\smallskip}
+non-void amplitudes & $|s_0\rangle$ & $|s_1\rangle$ & $|s_2\rangle$ & $|s_3\rangle$ & $|s_4\rangle$
+ \\
+\noalign{\smallskip}\hline\noalign{\smallskip}\hline
+\noalign{\smallskip}
+$(1-x1) \cdot (1-x2) \cdot (1-y1) \cdot (1-y2)$ & $000000$ & $000000$ & $100100$ & $100101$ & $000000$ \\
+$(1-x1) \cdot (1-x2) \cdot (1-y1) \cdot y2$ & $000100$ & $000100$ & $100000$ & $100000$ & $000101$ \\
+$(1-x1) \cdot (1-x2) \cdot y1 \cdot (1-y2)$ & $001000$ & $001000$ & $101100$ & $101101$ & $001000$ \\
+$(1-x1) \cdot (1-x2) \cdot y1 \cdot y2$ & $001100$ & $001100$ & $101000$ & $101000$ & $001101$ \\
+$(1-x1) \cdot x2 \cdot (1-y1) \cdot (1-y2)$ & $010000$ & $010000$ & $110100$ & $110101$ & $010000$ \\
+$(1-x1) \cdot x2 \cdot (1-y1) \cdot y2$ & $010100$ & $010100$ & $110000$ & $110000$ & $010101$ \\
+$(1-x1) \cdot x2 \cdot y1 \cdot (1-y2)$ & $011000$ & $011010$ & $111110$ & $111111$ & $011010$ \\
+$(1-x1) \cdot x2 \cdot y1 \cdot y2$ & $011100$ & $011110$ & $111010$ & $111010$ & $011111$ \\
+$x1 \cdot (1-x2) \cdot (1-y1) \cdot (1-y2)$ & $100000$ & $100000$ & $000100$ & $000100$ & $100001$ \\
+$x1 \cdot (1-x2) \cdot (1-y1) \cdot y2$ & $100100$ & $100100$ & $000000$ & $000000$ & $100101$ \\
+$x1 \cdot (1-x2) \cdot y1 \cdot (1-y2)$ & $101000$ & $101000$ & $001100$ & $001100$ & $101001$ \\
+$x1 \cdot (1-x2) \cdot y1 \cdot y2$ & $101100$ & $101100$ & $001000$ & $001000$ & $101101$ \\
+$x1 \cdot x2 \cdot (1-y1) \cdot (1-y2)$ & $110000$ & $110000$ & $010100$ & $010100$ & $110001$ \\
+$x1 \cdot x2 \cdot (1-y1) \cdot y2$ & $110100$ & $110100$ & $010000$ & $010000$ & $110101$ \\
+$x1 \cdot x2 \cdot y1 \cdot (1-y2)$ & $111000$ & $111010$ & $011110$ & $011110$ & $111011$ \\
+$x1 \cdot x2 \cdot y1 \cdot y2$ & $111100$ & $111110$ & $011010$ & $011010$ & $111111$ \\
+\noalign{\smallskip}\hline
+\noalign{\smallskip}
+\end{tabular}
+\end{table*}
+\end{footnotesize}

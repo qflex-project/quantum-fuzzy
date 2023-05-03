@@ -1,0 +1,33 @@
+\begin{footnotesize}
+\begin{table*}[ht]
+\centering
+\footnotesize
+\caption{Evolution of superposition quantum registers in modelling quantum circuit: $A_I \cap B_I$}
+\label{tab:x}
+\begin{tabular}{l|l|l|l|l|l}
+\hline\noalign{\smallskip}
+non-void amplitudes & $|s_0\rangle$ & $|s_1\rangle$ & $|s_2\rangle$ & $|s_3\rangle$ & $|s_4\rangle$
+ \\
+\noalign{\smallskip}\hline\noalign{\smallskip}\hline
+\noalign{\smallskip}
+$\sqrt{(1-x1)} \cdot \sqrt{(1-x2)} \cdot \sqrt{(1-y1)} \cdot \sqrt{(1-y2)}$ & $000000$ & $000000$ & $010100$ & $010101$ & $000000$ \\
+$\sqrt{(1-x1)} \cdot \sqrt{(1-x2)} \cdot \sqrt{(1-y1)} \cdot y2$ & $000100$ & $000100$ & $010000$ & $010000$ & $000101$ \\
+$\sqrt{(1-x1)} \cdot \sqrt{(1-x2)} \cdot y1 \cdot \sqrt{(1-y2)}$ & $001000$ & $001000$ & $011100$ & $011101$ & $001000$ \\
+$\sqrt{(1-x1)} \cdot \sqrt{(1-x2)} \cdot y1 \cdot y2$ & $001100$ & $001100$ & $011000$ & $011000$ & $001101$ \\
+$\sqrt{(1-x1)} \cdot x2 \cdot \sqrt{(1-y1)} \cdot \sqrt{(1-y2)}$ & $010000$ & $010000$ & $000100$ & $000100$ & $010001$ \\
+$\sqrt{(1-x1)} \cdot x2 \cdot \sqrt{(1-y1)} \cdot y2$ & $010100$ & $010100$ & $000000$ & $000000$ & $010101$ \\
+$\sqrt{(1-x1)} \cdot x2 \cdot y1 \cdot \sqrt{(1-y2)}$ & $011000$ & $011000$ & $001100$ & $001100$ & $011001$ \\
+$\sqrt{(1-x1)} \cdot x2 \cdot y1 \cdot y2$ & $011100$ & $011100$ & $001000$ & $001000$ & $011101$ \\
+$x1 \cdot \sqrt{(1-x2)} \cdot \sqrt{(1-y1)} \cdot \sqrt{(1-y2)}$ & $100000$ & $100000$ & $110100$ & $110101$ & $100000$ \\
+$x1 \cdot \sqrt{(1-x2)} \cdot \sqrt{(1-y1)} \cdot y2$ & $100100$ & $100100$ & $110000$ & $110000$ & $100101$ \\
+$x1 \cdot \sqrt{(1-x2)} \cdot y1 \cdot \sqrt{(1-y2)}$ & $101000$ & $101010$ & $111110$ & $111111$ & $101010$ \\
+$x1 \cdot \sqrt{(1-x2)} \cdot y1 \cdot y2$ & $101100$ & $101110$ & $111010$ & $111010$ & $101111$ \\
+$x1 \cdot x2 \cdot \sqrt{(1-y1)} \cdot \sqrt{(1-y2)}$ & $110000$ & $110000$ & $100100$ & $100100$ & $110001$ \\
+$x1 \cdot x2 \cdot \sqrt{(1-y1)} \cdot y2$ & $110100$ & $110100$ & $100000$ & $100000$ & $110101$ \\
+$x1 \cdot x2 \cdot y1 \cdot \sqrt{(1-y2)}$ & $111000$ & $111010$ & $101110$ & $101110$ & $111011$ \\
+$x1 \cdot x2 \cdot y1 \cdot y2$ & $111100$ & $111110$ & $101010$ & $101010$ & $111111$ \\
+\noalign{\smallskip}\hline
+\noalign{\smallskip}
+\end{tabular}
+\end{table*}
+\end{footnotesize}

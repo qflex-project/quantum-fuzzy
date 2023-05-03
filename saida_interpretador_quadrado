@@ -1,0 +1,132 @@
+#####  E+:
+	 ((1-x^2)*y^2+x^2*(1-y^2)-(1-x^2)*y^2*x^2*(1-y^2))
+	Expanded:
+ -x**4*y**4 + x**4*y**2 + x**2*y**4 - 3*x**2*y**2 + x**2 + y**2
+	Latex:
+ - x^{4} y^{4} + x^{4} y^{2} + x^{2} y^{4} - 3 x^{2} y^{2} + x^{2} + y^{2}
+	Latex 2:
+ - f_A(x)^{4} f_B(x)^{4} + f_A(x)^{4} f_B(x)^{2} + f_A(x)^{2} f_B(x)^{4} - 3 f_A(x)^{2} f_B(x)^{2} + f_A(x)^{2} + f_B(x)^{2}
+
+
+
+#####  Ex:
+	 (x+y-x*y)*(1-x*y)
+	Expanded:
+ x**2*y**2 - x**2*y - x*y**2 - x*y + x + y
+	Latex:
+ x^{2} y^{2} - x^{2} y - x y^{2} - x y + x + y
+	Latex 2:
+ f_A(x)^{2} f_B(x)^{2} - f_A(x)^{2} f_B(x) - f_A(x) f_B(x)^{2} - f_A(x) f_B(x) + f_A(x) + f_B(x)
+
+
+
+#####  D+:
+	 ((1-x)+y-(1-x)*y)*(x+(1-y)-x*(1-y))
+	Expanded:
+ x**2*y**2 - x**2*y - x*y**2 + 3*x*y - x - y + 1
+	Latex:
+ x^{2} y^{2} - x^{2} y - x y^{2} + 3 x y - x - y + 1
+	Latex 2:
+ f_A(x)^{2} f_B(x)^{2} - f_A(x)^{2} f_B(x) - f_A(x) f_B(x)^{2} + 3 f_A(x) f_B(x) - f_A(x) - f_B(x) + 1
+
+
+
+#####  Dx:
+	 (x*y+(1-(x+y-x*y))-x*y*(1-(x+y-x*y)))
+	Expanded:
+ -x**2*y**2 + x**2*y + x*y**2 + x*y - x - y + 1
+	Latex:
+ - x^{2} y^{2} + x^{2} y + x y^{2} + x y - x - y + 1
+	Latex 2:
+ - f_A(x)^{2} f_B(x)^{2} + f_A(x)^{2} f_B(x) + f_A(x) f_B(x)^{2} + f_A(x) f_B(x) - f_A(x) - f_B(x) + 1
+
+
+
+#####  Ie:  E-(x,S(N(x),N(y)))
+	 (x+((1-x)+(1-y)-(1-x)*(1-y))-2*x*((1-x)+(1-y)-(1-x)*(1-y)))
+	Expanded:
+ 2*x**2*y - x*y - x + 1
+	Latex:
+ 2 x^{2} y - x y - x + 1
+	Latex 2:
+ 2 f_A(x)^{2} f_B(x) - f_A(x) f_B(x) - f_A(x) + 1
+
+
+
+#####  Je:  D-(x,T(N(x),N(y)))
+	 (1-x-(1-x)*(1-y)+2*x*(1-x)*(1-y))
+	Expanded:
+ 2*x**2*y - 2*x**2 - 3*x*y + 2*x + y
+	Latex:
+ 2 x^{2} y - 2 x^{2} - 3 x y + 2 x + y
+	Latex 2:
+ 2 f_A(x)^{2} f_B(x) - 2 f_A(x)^{2} - 3 f_A(x) f_B(x) + 2 f_A(x) + f_B(x)
+
+
+
+#####  If:  E*(x,N(T(x,y)))
+	 (x+(1-x*y)-x*(1-x*y)-x*(1-x*y)^2-x^2*(1-x*y)+x^2*(1-x*y)^2)
+	Expanded:
+ x**4*y**2 - x**3*y**2 - x**3*y + 3*x**2*y - x*y - x + 1
+	Latex:
+ x^{4} y^{2} - x^{3} y^{2} - x^{3} y + 3 x^{2} y - x y - x + 1
+	Latex 2:
+ f_A(x)^{4} f_B(x)^{2} - f_A(x)^{3} f_B(x)^{2} - f_A(x)^{3} f_B(x) + 3 f_A(x)^{2} f_B(x) - f_A(x) f_B(x) - f_A(x) + 1
+
+
+
+#####  Jf:  D*(x,N(S(x,y)))
+	 (1-x-(1-(x+y-x*y))+x*(1-(x+y-x*y))+x*(1-(x+y-x*y))^2+x^2*(1-(x+y-x*y))-x^2*(1-(x+y-x*y))^2)
+	Expanded:
+ -x**4*y**2 + 2*x**4*y - x**4 + 3*x**3*y**2 - 5*x**3*y + 2*x**3 - 3*x**2*y**2 + 6*x**2*y - 3*x**2 + x*y**2 - 4*x*y + 2*x + y
+	Latex:
+ - x^{4} y^{2} + 2 x^{4} y + 3 x^{3} y^{2} - x^{4} - 5 x^{3} y - 3 x^{2} y^{2} + 2 x^{3} + 6 x^{2} y + x y^{2} - 3 x^{2} - 4 x y + 2 x + y
+	Latex 2:
+ - f_A(x)^{4} f_B(x)^{2} + 2 f_A(x)^{4} f_B(x) + 3 f_A(x)^{3} f_B(x)^{2} - f_A(x)^{4} - 5 f_A(x)^{3} f_B(x) - 3 f_A(x)^{2} f_B(x)^{2} + 2 f_A(x)^{3} + 6 f_A(x)^{2} f_B(x) + f_A(x) f_B(x)^{2} - 3 f_A(x)^{2} - 4 f_A(x) f_B(x) + 2 f_A(x) + f_B(x)
+
+
+
+#####  Is:  S(N(x),E+(N(x),y))
+	 ((1-x)+((1-x)+y-3*(1-x)*y+(1-x)*y^2+(1-x)^2*y-(1-x)^2*y^2)-(1-x)*((1-x)+y-3*(1-x)*y+(1-x)*y^2+(1-x)^2*y-(1-x)^2*y^2))
+	Expanded:
+ -x**3*y**2 + x**3*y + x**2*y**2 + x**2*y - x**2 - x*y + 1
+	Latex:
+ - x^{3} y^{2} + x^{3} y + x^{2} y^{2} + x^{2} y - x^{2} - x y + 1
+	Latex 2:
+ - f_A(x)^{3} f_B(x)^{2} + f_A(x)^{3} f_B(x) + f_A(x)^{2} f_B(x)^{2} + f_A(x)^{2} f_B(x) - f_A(x)^{2} - f_A(x) f_B(x) + 1
+
+
+
+#####  Js:  T(N(x),D+(N(x),y))
+	 (1-x)*(1-(1-x)-y+3*(1-x)*y-(1-x)*y^2-(1-x)^2*y+(1-x)^2*y^2)
+	Expanded:
+ -x**3*y**2 + x**3*y + 2*x**2*y**2 - x**2 - x*y**2 - 2*x*y + x + y
+	Latex:
+ - x^{3} y^{2} + x^{3} y + 2 x^{2} y^{2} - x y^{2} - x^{2} - 2 x y + x + y
+	Latex 2:
+ - f_A(x)^{3} f_B(x)^{2} + f_A(x)^{3} f_B(x) + 2 f_A(x)^{2} f_B(x)^{2} - f_A(x) f_B(x)^{2} - f_A(x)^{2} - 2 f_A(x) f_B(x) + f_A(x) + f_B(x)
+
+
+
+#####  It:  E-(N(x),T(x,y))
+	 ((1-x)+x*y-2*(1-x)*x*y)
+	Expanded:
+ 2*x**2*y - x*y - x + 1
+	Latex:
+ 2 x^{2} y - x y - x + 1
+	Latex 2:
+ 2 f_A(x)^{2} f_B(x) - f_A(x) f_B(x) - f_A(x) + 1
+
+
+
+#####  Jt:  D-(N(x),S(x,y))
+	 (1-(1-x)-(x+y-x*y)+2*(1-x)*(x+y-x*y))
+	Expanded:
+ 2*x**2*y - 2*x**2 - 3*x*y + 2*x + y
+	Latex:
+ 2 x^{2} y - 2 x^{2} - 3 x y + 2 x + y
+	Latex 2:
+ 2 f_A(x)^{2} f_B(x) - 2 f_A(x)^{2} - 3 f_A(x) f_B(x) + 2 f_A(x) + f_B(x)
+
+
+

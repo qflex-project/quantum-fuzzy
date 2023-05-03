@@ -1,0 +1,2 @@
+import teste
+teste.teste()

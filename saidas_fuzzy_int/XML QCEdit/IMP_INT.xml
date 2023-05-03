@@ -1,0 +1,37 @@
+<circuit arq="IMP_INT.xml">
+<initialState qubits="6" state="000000"/>
+<simulation>
+<step>
+<gate name="Id" definition="" extra="" />
+<gate name="X" definition="" extra="paulix" />
+<gate name="X" definition="" extra="paulix" />
+<gate name="Id" definition="" extra="" />
+<gate name="Id" definition="" extra="" />
+<gate name="Id" definition="" extra="" />
+</step>
+<step>
+<gate name="Id" definition="" extra="" />
+<gate name="C1(1)" definition="" extra="" />
+<gate name="C1(1)" definition="" extra="" />
+<gate name="Id" definition="" extra="" />
+<gate name="Target1(X)" definition="" extra="alvo" />
+<gate name="Id" definition="" extra="" />
+</step>
+<step>
+<gate name="Id" definition="" extra="" />
+<gate name="X" definition="" extra="paulix" />
+<gate name="X" definition="" extra="paulix" />
+<gate name="Id" definition="" extra="" />
+<gate name="X" definition="" extra="paulix" />
+<gate name="Id" definition="" extra="" />
+</step>
+<step>
+<gate name="C1(1)" definition="" extra="" />
+<gate name="Id" definition="" extra="" />
+<gate name="Id" definition="" extra="" />
+<gate name="C1(1)" definition="" extra="" />
+<gate name="Id" definition="" extra="" />
+<gate name="Target1(X)" definition="" extra="alvo" />
+</step>
+</simulation>
+</circuit>
