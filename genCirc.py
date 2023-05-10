@@ -20,9 +20,10 @@ y = [1,[], "y"]
 
 class genCirc:
 	def __init__(self):
+		pass
 		# print ("XOR PLUS")
 		# #print ((Ie(x,y))[0])
-		#print (If(x,y))
+		# print (If(x,y))
 		# print ((E_plus(x,y))[2],"\n\n")
 
 		# print ((D_plus(x,y))[1])
