@@ -15,12 +15,14 @@ y1 = [1,[], "y1"]
 y2 = [1,[], "y2"]
 N = [1,[], "N"]
 
+x = [1,[], "x"]
+y = [1,[], "y"]
+
 class genCirc:
 	def __init__(self):
-		pass
 		# print ("XOR PLUS")
 		# #print ((Ie(x,y))[0])
-		# print ((E_plus(x,y))[1])
+		#print (If(x,y))
 		# print ((E_plus(x,y))[2],"\n\n")
 
 		# print ((D_plus(x,y))[1])
@@ -90,9 +92,7 @@ class genCirc:
 		# print ((Jf(x,y))[2])
 		# print ((Js(x,y))[1])
 		# print ((Js(x,y))[2])
-		
-		
-		
+
 def T(x, y):
 	if (DEBUGG):
 		print ("T ", x, " ", y)
@@ -120,10 +120,9 @@ def T(x, y):
 	
 	return [s, nl, le]
 
-
 def N(x):
 	if (DEBUGG):
-		print ("N ",x)
+		print ("N ", x)
 	
 	l = x[1]
 	nc = "p," + str(x[0])
@@ -177,7 +176,6 @@ def D_minus(x,y):
 	lc = [lc1[0]+2, lc1[1] + lc2, lc1[2] + ",0,0"]
 
 	return lc
-
 	
 def E_times(x,y):
 	return T(S(x,y),N(T(x,y)))

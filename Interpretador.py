@@ -21,6 +21,9 @@ class Interpretador:
 
 		self.operadores = {}
 
+		self.operadores["AND"] = "T(x,y)"
+		self.operadores["OR"] = "S(x,y)"
+
 		self.operadores["E+"] = "S(T(N(x),y),T(x,N(y)))"
 		self.operadores["Ex"] = "T(S(x,y),N(T(x,y)))"
 		self.operadores["D+"] = "T(S(N(x),y),S(x,N(y)))"
@@ -38,12 +41,13 @@ class Interpretador:
 		self.operadores["It"] = "E-(N(x),T(x,y))"
 		self.operadores["Jt"] = "D-(N(x),S(x,y))"
 
-	def parseOperator(self, string):
-		op = self.operadores[string]
+	def parseOperator(self, operador, values = None):
+		op = self.operadores.get(operador)
 		if op == None:
+			print ("Operador não encontrado", operator)
 			return {}
 		
-		expressions = self.parserExp(op)
+		expressions = self.parserExp(op, values)
 		for exp in expressions:
 			print (exp, "\t", expressions[exp])
 
