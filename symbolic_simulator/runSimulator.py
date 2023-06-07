@@ -13,3 +13,5 @@ print ("#######")
 simulator.executeCircuit("C-X,0-3;X,0;H,0;H,0")
 
 simulator.printNonZeroPosState()
+
+simulator.measure([0], True)

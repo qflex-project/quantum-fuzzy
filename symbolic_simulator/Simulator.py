@@ -11,6 +11,23 @@ from sympy import latex, pi, sin, asin, Integral, Matrix, Rational
 from sympy.abc import x, y, N, mu, r, tau
 
 """
+# createState(numQubits, inputQubits)
+## numQubits: Number of qubits in the state (n)
+## inputQubits: List of input qubits, can use synmbolic variables from sympy.abc, it goes from qubit n-1 to 0 (most significant to least significant)
+
+# executeGate(self, gate, targetQubit, controlQubits, controlValues)
+## gate: Gate matrix(2x2) to be applied, can be obtained from getGate(name)
+## targetQubit: Target qubit on which the gate is to be applied
+## controlQubits: List of control qubits, can be None if isn't a controlled gate
+## controlValues: List of control values, can be None and them will assume all control qubits are 1
+
+# executeCircuit(circuit)
+## circuit: Circuit to be executed
+
+# measure(qubitsToMeasure, doPrint)
+## qubitsToMeasure: List of qubits to measure
+## doPrint: If True, will print the result of the measurement
+
 # Circuit format	
 # Normal Gate -> Gate,Qubit -> Example: H,3 -> Applies Hadamard gate on qubit 3
 # Controlled Gate -> C-Gate,TargetQubit-ControlQubits-ControlValues -> Example: C-X,3-1,2-1,0 -> Applies X gate on qubit 3 if qubits 1 and 2 are 1 and 0 respectively
@@ -102,6 +119,39 @@ class Simulator:
 		tmp = self.state
 		self.state = self.resultState
 		self.resultState = tmp
+	
+	def measure(self, qubitsToMeasure, doPrint = False):
+		maskValueToMeasure = {}
+		
+		numMeasureQubits = len(qubitsToMeasure)
+		totalMeasures = pow(2, numMeasureQubits)
+
+		measureMask = 0
+		for q in range(0, numMeasureQubits):
+			measureMask = measureMask | (1 << qubitsToMeasure[q])
+		
+		measureOutput = []
+		for i in range(0, totalMeasures):
+			measureOutput.append(0)
+
+		for p in range(0, totalMeasures):
+			binary = [int(i) for i in list(numpy.binary_repr(p, numMeasureQubits))]
+			mask = 0
+			for q in range(0, numMeasureQubits):
+				mask = mask | (binary[q] << qubitsToMeasure[q])
+			
+			maskValueToMeasure[mask] = p
+		
+		for p in range(0, self.totalPositions):
+			idx = maskValueToMeasure[(p & measureMask)]
+			measureOutput[idx] = measureOutput[idx] + pow(self.state[p], 2)
+		
+		if doPrint:
+			for m in range(0, totalMeasures):
+				print (numpy.binary_repr(m, numMeasureQubits), measureOutput[m])
+
+		return measureOutput
+
 	
 	def executeCircuit(self, circuit):
 		steps = circuit.split(";")
