@@ -23,11 +23,32 @@ class Interpretador:
 
 		self.operadores["AND"] = "T(x,y)"
 		self.operadores["OR"] = "S(x,y)"
+		self.operadores["DIF"] = "T(x,N(y))"
+		self.operadores["CoDIF"] = "S(x,N(y))"
+		self.operadores["IMPsn"] = "S(N(x),y)"
+		self.operadores["CoIMPsn"] = "T(N(x),y)"
+		self.operadores["IMPgn"] = "G(N(x),y)"
+		self.operadores["CoIMPgn"] = "O(N(x),y)"
+
+		self.operadores["IMPql"] = "S(N(x),T(x,y))"
+		self.operadores["CoIMPql"] = "N(S(x, T(N(x),N(y))))"
+
+		self.operadores["IMPgno"] = "G(N(x), O(x,y))"
+		self.operadores["CoIMPgno"] = "O(N(x), G(x,y))"
+
+		self.operadores["eXorCoIMP-"] = "E-(x,S(N(x),N(y)))"
+		self.operadores["EGroupingOverlap"] = "T(G(x,y),N(O(x,y)))"
+		self.operadores["DGroupingOverlap"] = "T(O(x,y),N(G(x,y)))"
+		self.operadores["Overlap"] = "O(x,y)"
+		self.operadores["Grouping"] = "G(x,y)"
 
 		self.operadores["E+"] = "S(T(N(x),y),T(x,N(y)))"
 		self.operadores["Ex"] = "T(S(x,y),N(T(x,y)))"
 		self.operadores["D+"] = "T(S(N(x),y),S(x,N(y)))"
 		self.operadores["Dx"] = "S(T(x,y),N(S(x,y)))"
+
+		self.operadores["E-"] = "E-"
+		self.operadores["D-"] = "D-"
 
 		self.operadores["Ie"] = "E-(x,S(N(x),N(y)))"
 		self.operadores["Je"] = "D-(x,T(N(x),N(y)))"
@@ -41,10 +62,12 @@ class Interpretador:
 		self.operadores["It"] = "E-(N(x),T(x,y))"
 		self.operadores["Jt"] = "D-(N(x),S(x,y))"
 
+		self.fuzzy["Possibility"] = "T(x,N(y))"
+
 	def parseOperator(self, operador, values = None):
 		op = self.operadores.get(operador)
 		if op == None:
-			print ("Operador não encontrado", operator)
+			print ("Operador não encontrado", operador)
 			return {}
 		
 		expressions = self.parserExp(op, values)
@@ -109,6 +132,10 @@ class Interpretador:
 			exp = "x*y"
 		elif f[0] == 'S':
 			exp = "(x+y-x*y)"
+		elif f[0] == 'O':
+			exp = "(x**2*y**2)"
+		elif f[0] == 'G':
+			exp = "(1-(1-x)**2*(1-y)**2)"
 		elif f[0] == 'E':
 			if f[1] == '-':
 				exp = "(x+y-2*x*y)"

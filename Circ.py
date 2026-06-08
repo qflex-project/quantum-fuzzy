@@ -1,5 +1,9 @@
+# COMANDO: python runCirc.py PORTA
+# python runCirc.py AND
+
 from math import pi as Pi
 from math import sqrt as sqrt
+from math import floor
 from cmath import exp
 import genCirc
 import numpy
@@ -31,7 +35,7 @@ from genCirc import N as N
 
 # 	C-Not 
 # Identifcador:	c
-# Parametros:		primeiro qubit de controle, segundo qubit de controle, qubit alvo
+# Parametros:		primeiro qubit de controle, segundo qubit alvo
 # Exemplo:		c,4,5		--Aplica a Toffoli tendo como controle o qubit 4 e como alvo o qubit 5
 
 
@@ -75,22 +79,46 @@ from genCirc import N as N
 
 class Circ:
 	def __init__ (self):
-		#valores iniciais dos qubits
-		entradaFuzzy = "x,y"
-		#circuitos fuzzy
-		self.fuzzy = {}
-		self.fuzzy["AND"] = [3, ["pr,pv", "t,1,2,3", "pr,pos", "m2,3"], entradaFuzzy]
+		entradaFuzzy = "x,y,0"
+		self.fuzzy["AND"] = [3, ["pr,pv", "pr,pos", "t,1,2,3", "pr,pos", "m2,3"], entradaFuzzy]
+		self.fuzzy["OR"] = [3, ["pr,pv", "p,1", "p,2", "pr,pos", "t,1,2,3", "p,3", "pr,pos", "m2,3"], entradaFuzzy]
+		self.fuzzy["DIF"] = [3, ["pr,pv", "p,2", "pr,pos", "t,1,2,3", "p,2", "pr,pos", "m2,3"], entradaFuzzy]
+		self.fuzzy["CoDIF"] = [3, ["pr,pv", "p,1", "pr,pos", "t,1,2,3", "p,1", "p,3", "pr,pos", "m2,3"], entradaFuzzy]
+		self.fuzzy["IMPsn"] = [3, ["pr,pv", "p,2", "pr,pos", "t,1,2,3", "p,2", "p,3", "pr,pos", "m2,3"], entradaFuzzy]
+		self.fuzzy["CoIMPsn"] = [3, ["pr,pv", "p,1", "pr,pos", "t,1,2,3", "p,1", "pr,pos", "m2,3"], entradaFuzzy]
+		self.fuzzy["Possibility"] = [3, ["pr,pv", "pr,pos", "p,2", "pr,pos", "t,1,2,3", "pr,pos", "m2,3"], entradaFuzzy]
+		
+		entradaImp = "x,x,y,0,0"
+		self.fuzzy["IMPql"] = [5, ["pr,pv", "pr,pos", "t,2,3,4", "p,4", "pr,pos", "t1,4,5", "p,5", "pr,pos", "m2,5"], entradaImp]
+		self.fuzzy["CoIMPql"] = [5, ["pr,pv", "pr,pos", "p,1", "p,2", "p,3" "t,2,3,4", "p,2", "p,3", "p,4", "pr,pos", "t1,4,5", "p,1", "p,5", "pr,pos", "m2,5"], entradaImp]
 
+		entradaXorMenos = "x,y,0,0,0"
+		self.fuzzy["E-"] = [5, ["pr,pv", "pr,pos", "p,1", "t,1,2,3" ,"p,1", "pr,pos", "p,2", "t,1,2,4", "p,2", "pr,pos", "p,3", "p,4", "t,3,4,5", "p,3", "p,4", "p,5" "pr,pos", "m2,5"], entradaXorMenos]
+		self.fuzzy["D-"] = [5, ["pr,pv", "pr,pos", "p,2", "t,1,2,3" ,"p,2", "p,3", "pr,pos", "p,1", "t,1,2,4", "p,1", "p,4" "pr,pos", "t,3,4,5", "pr,pos", "m2,5"], entradaXorMenos]
 
+		entradaDuplicada = "x,y,x,y"
+		self.fuzzy["E+"] = [7, ["pr,pv", "pr,pos", "p,1", "t,1,2,5", "p,1", "pr,pos", "p,4", "t,3,4,6", "p,4", "pr,pos", "p,5", "p,6", "t,5,6,7", "p,5", "p,6", "p,7", "pr,pos", "m2,7"], entradaDuplicada]
+		self.fuzzy["D+"] = [7, ["pr,pv", "pr,pos", "p,2", "t,1,2,5", "p,2", "p,5", "pr,pos", "p,3", "t,3,4,6", "p,3", "p,6", "pr,pos", "t,5,6,7", "pr,pos", "m2,7"], entradaDuplicada]
+		self.fuzzy["Ex"] = [7, ["pr,pv", "p,1", "p,2", "t,1,2,5", "p,1", "p,2", "p,5", "t,3,4,6", "p,6", "t,5,6,7", "pr,pos", "m2,7"], entradaDuplicada]
+		self.fuzzy["Dx"] = [7, ["pr,pv", "t,1,2,5", "pr,pos", "p,3", "p,4", "t,3,4,6", "p,3", "p,4", "pr,pos", "p,5", "p,6", "t,5,6,7", "p5", "p,6", "p,7", "pr,pos", "m2,7"], entradaDuplicada]
+		self.fuzzy["eXorCoIMP-"] = [8, ["pr,pv", "t,1,2,4", "p,3", "p,4", "pr,pos", "t,3,4,5", "p,3", "t,1,2,6", "pr,pos", "t,3,6,7", "p,5", "p,7", "pr,pos", "t,5,7,8", "p,8" , "pr,pos", "m2,7"], entradaDuplicada]
+		
 		entradaFuzzySquare = "x,x,y,y"
-		self.fuzzySquare = {}
-		self.fuzzySquare["AND"] = [7, ["pr,pv", "t,1,2,5", "t,3,4,6", "pr,pos", "t,5,6,7", "pr,pos", "m2,7"], entradaFuzzySquare]
-		self.fuzzySquare["OR"] = [7, ["pr,pv", "t,1,2,5", "t,3,4,6", "pr,pos", "p,5", "p,6", "t,5,6,7", "p,5", "p,6", "p,7", "pr,pos", "m2,7"], entradaFuzzySquare]
+		self.fuzzy["AND"] = [7, ["pr,pv", "pr,pos", "t,1,2,5", "pr,pos", "t,3,4,6", "pr,pos", "t,5,6,7", "pr,pos", "m2,7"], entradaFuzzySquare]
+		self.fuzzy["OR"] = [7, ["pr,pv", "pr,pos", "t,1,2,5", "pr,pos", "t,3,4,6", "p,5", "p,6", "pr,pos", "t,5,6,7", "p,5", "p,6", "p,7", "pr,pos", "m2,7"], entradaFuzzySquare]
+		self.fuzzy["IMPgn"] = [7, ["pr,pv", "pr,pos", "t,1,2,5", "pr,pos", "p,3", "p,4", "t,3,4,6", "p,3", "p,4", "pr,pos", "t,5,6,7", "p,7", "pr,pos", "m2,7"], entradaFuzzySquare]
+		self.fuzzy["COIMPgn"] = [7, ["pr,pv", "pr,pos", "p,1", "p,2", "t,1,2,5", "p,1", "p,2", "pr,pos", "t,3,4,6", "pr,pos", "t,5,6,7", "pr,pos", "m2,7"], entradaFuzzySquare]
+		self.fuzzy["Overlap"] = [7, ["pr,pv", "t,1,2,5", "pr,pos", "t,3,4,6", "pr,pos", "t,5,6,7", "pr,pos", "m2,7"], entradaFuzzySquare]
+		self.fuzzy["Grouping"] = [7, ["pr,pv", "p,1", "p,2", "t,1,2,5", "p,1", "p,2", "pr,pos", "p,3", "p,4","t,3,4,6", "p,3", "p,4", "pr,pos", "t,5,6,7", "pr,pos", "p,7", "pr,pos", "m2,7"], entradaFuzzySquare]
+		self.fuzzy["EGroupingOverlap"] = [11, ["pr,pv", "p,1", "p,2", "t,1,2,5", "p,1", "p,2", "p,3", "p,4", "t,3,4,6", "p,3", "p,4", "t,5,6,7", "p,7", "pr,pos", "t,1,2,8", "t,3,4,9", "t,8,9,10", "pr,pos", "p,10", "t,7,10,11", "pr,pos", "m2,11"], entradaFuzzySquare]
+		self.fuzzy["DGroupingOverlap"] = [11, ["pr,pv", "t,1,2,5", "t,3,4,6", "t,5,6,7", "p,7", "pr,pos", "p,1", "p,2", "p,3", "p,4", "t,1,2,8", "t,3,4,9", "t,8,9,10" , "p,1", "p,2", "p,3", "p,4","pr,pos", "p,10", "t,7,10,11", "p,11", "pr,pos", "m2,11"], entradaFuzzySquare]
 
-		#valores iniciais dos qubits
-		entradaIntucionista = "x1,x2,y1,y2"
+		entradaIMPGNO = "x,x,x,x,y,y"
+		self.fuzzy["IMPqlGNO"] = [11, ["pr,pv", "pr,pos", "t,1,2,7" , "t,3,4,8" , "t,5,6,9" , "t,8,9,10" , "t,7,10,11", "pr,pos", "m2,11"], entradaIMPGNO]
+		self.fuzzy["CoIMPqlGNO"] = [11, ["pr,pv", "pr,pos", "p,1", "p,2", "t,1,2,7", "p,1", "p,2", "p,3", "p,4", "t,3,4,8", "p,3", "p,4", "p,5", "p,6",  "t,5,6,9", "p,5", "p,6", "t,8,9,10" , "p,10", "t,7,10,11", "pr,pos", "m2,11"], entradaIMPGNO]
+
 		#circuitos fuzzy intucionista
-		self.intFuzzy = {}
+		entradaIntucionista = "x1,x2,y1,y2"
 		self.intFuzzy["AND"]	= [6, ["pr,pv", "t,1,3,5", "pr,pos", "p,2", "p,4", "t,2,4,6", "p,2", "p,4", "p,6", "pr,pos", "m2,5", "m2,6"], entradaIntucionista]
 		self.intFuzzy["OR"]		= [6, ["pr,pv", "p,1", "p,3", "pr,pos", "t,1,3,5", "pr,pos", "p,1", "p,3", "p,5", "pr,pos", "t,2,4,6", "pr,pos", "m2,5", "m2,6"], entradaIntucionista]
 		self.intFuzzy["IMP"]	= [6, ["pr,pv", "p,2", "p,3", "pr,pos", "t,2,3,5", "pr,pos", "p,2", "p,3", "p,5", "pr,pos", "t,1,4,6", "pr,pos", "m2,5", "m2,6"], entradaIntucionista]
@@ -102,7 +130,7 @@ class Circ:
 		self.intFuzzy["Ex"] 	= [8, ["pr,pv","p,1", "p,3", "t,1,3,7", "p,1", "p,3", "p,7", "pr,pos", "p,2", "p,4", "t,2,4,8", "p,2", "p,4", "p,8", "pr,pos", "t,7,8,5", "pr,pos", "p,2", "p,4", "p,8", "t,2,4,8","p,2", "p,4", "pr,pos", "p,1", "p,3", "p,7", "t,1,3,7", "p,1", "p,3", "pr,pos", "t,2,4,7", "pr,pos", "t,1,3,8", "pr,pos", "p,7", "p,8", "t,7,8,6", "p,6", "p,7", "p,8", "pr,pos", "t,1,3,8", "pr,pos", "t,2,4,7", "pr,pos", "m2,5", "m2,6"], entradaIntucionista]
 		self.intFuzzy["X+"] 	= [10, ["pr,pv", "t,2,3,5", "pr,pos", "t,1,4,6", "pr,pos", "p,5", "p,6", "t,5,6,9", "p,5", "p,6", "p,9", "pr,pos", "p,1", "p,4", "t,1,4,7", "p,1", "p,4", "p,7", "pr,pos", "p,2", "p,3", "t,2,3,8", "p,2", "p,3", "p,8", "pr,pos", "t,7,8,10", "pr,pos", "m,9,1", "pr,m", "m,10,1", "pr,m"], entradaIntucionista]
 		self.intFuzzy["Xx"] 	= [10, ["pr,pv", "p,1", "p,3", "t,1,3,5", "p,1", "p,3", "p,5", "pr,pos", "p,2", "p,4", "t,2,4,6", "p,2", "p,4", "p,6", "pr,pos", "t,5,6,9", "pr,pos", "t,2,4,7", "pr,pos", "t,1,3,8", "pr,pos", "p,7", "p,8", "t,7,8,10","p,7", "p,8", "p,10", "pr,pos", "m,9,1", "pr,m", "m,10,1", "pr,m"], entradaIntucionista]
-
+	
 	# executa um circuito fuzzy
 	def executeFuzzyCirc(self, operator):
 		circ = self.fuzzy.get(operator)
@@ -140,7 +168,7 @@ class Circ:
 
 		pos = self.parserPos(q, 0)
 		val = self.parserVal(q, pos)
-		
+
 		pos = self.execute(pos, val, c)
 
 		ret = self.parserPosVal(pos, val)
@@ -156,6 +184,7 @@ class Circ:
 			self.printMemory(values, d+1, partial1)
 
 	def printPos(self, positions):
+		#print(positions)
 		for p in positions:
 			print (("".join(p)))
 
@@ -200,11 +229,16 @@ class Circ:
 			if (raiz != ""):
 				e += "\sqrt{" + raiz[1:] + "}"
 
+			#print(e)
 			e = e.replace("*","")
 			e = e.replace("x","f_A")
 			e = e.replace("y","f_B")
-
-			ef = " + " + e + "|" + pv[1] + "\\rangle"
+			if 'H' in e:
+				e = e.replace("H","\\frac{1}{\sqrt{2}}(")
+				ef = " + " + e + ")" + "|" + pv[1] + "\\rangle"
+				#print(ef)
+			else:
+				ef = " + " + e + "|" + pv[1] + "\\rangle"
 
 			m = int(pv[1][-1])
 			r[m] += " + " + e
@@ -296,6 +330,14 @@ class Circ:
 			i+=1
 		return new[1:]
 
+	def hadamard(self, positions, values, qubit):
+		sqrtvar = 'H'
+		for p in range(len(positions)):
+			values[p] = str( str(sqrtvar) + values[p] )  # Adicionar "1/2" ao início
+		#print(values)
+		#print(positions)
+		return positions, values
+
 	def pauliX(self, positions, qubit):
 		for p in positions:
 			if p[qubit] == "0":
@@ -321,6 +363,34 @@ class Circ:
 					p[target] = "0"
 
 		return positions
+
+	def vGate(self, positions, values, control, target):
+		#j = floor((-1)**(1/2))
+		j = (-1)**(1/2)
+		sqrtvar = [(1+j)/2, (-1+j)/2], [(-1+j)/2, (1+j)/2]
+		sqr1 = [(1+j)/2, (-1+j)/2]
+		sqr2 = [(-1+j)/2, (1+j)/2]
+		
+		#Retorna o qubit do alvo
+		#for p in range(0, len(positions)):
+		#	if positions[p][control] == "1":
+		#		print( positions[p][control])
+		#		if(positions[p][target] == "1"):
+		#			positions[p][target] = str(sqr1)
+		#		else:
+		#			positions[p][target] = str(sqr2)
+  
+		#Retorna as amplitudes do qubit alvo
+		for p in range(0, len(positions)):
+			if positions[p][control] == "1":
+					print(positions[p][target])
+					print(values[p])
+					print(sqrtvar[int(positions[p][target])])
+					if(values[p] == "1"):
+						values[p] = str((1+j)/2 + (-1+j)/2)
+					else:
+						values[p] = str((-1+j)/2 + (1+j)/2)
+		return positions, values
 
 	def toffoli(self, positions, control1, control2, target):
 		for p in positions:
@@ -385,9 +455,13 @@ class Circ:
 		for i in range(0, pow(2,len(qubits))):
 			m.append("")
 
+		if 'H' in values:
+			values = values.replace("H","1/√2")
+
 		for p in range (0, len(positions)):
 			pos = 0
 			for q in qubits:
+
 				pos = pos * 2 + int(positions[p][q-1])
 			
 			m[pos] += "+" + values[p]
@@ -404,7 +478,9 @@ class Circ:
 			#print (c)
 			par = c.split(',')
 
-			if par[0] == "p":
+			if par[0] == "h":
+				pos, val = self.hadamard(pos, val, int(par[1])-b)
+			elif par[0] == "p":
 				pos = self.pauliX(pos, int(par[1])-b)
 			elif par[0] == "z":
 				pos, val = self.pauliZ(pos, val, int(par[1])-b)			
@@ -414,6 +490,8 @@ class Circ:
 				pos = self.toffoli(pos, int(par[1])-b, int(par[2])-b, int(par[3])-b)
 			elif par[0] == "t00":
 				pos = self.toffoli00(pos, int(par[1])-b, int(par[2])-b, int(par[3])-b)
+			elif par[0] == "vGate":
+				pos, val = self.vGate(pos, val, int(par[1])-b, int(par[2])-b)
 			elif par[0] == "m":
 				m = self.measure(pos, val, int(par[1])-b, int(par[2]))
 			elif par[0] == "m2":
@@ -496,16 +574,23 @@ class Circ:
 		col += 1
 		for c in expr:
 			op = c[0]
-
 			temp = regex.findall(r'\d+', c)
 			arg = list(map(int, temp))
-
+			
 			if op == "N":
 				output = output + "\n% Column {}".format(col)
 				for idx in arg:
 					output = output + "\n\\node[operator] (q{}_{}) at ({},{}) {{X}} edge [-] (q{}_{});".format(idx, col, col*x, y*(-(idx-1)), idx, l[idx-1])
 					l[idx-1] = col
 				col+=1
+
+			if op == "h":
+				output = output + "\n% Column {}".format(col)
+				for idx in arg:
+					output = output + "\n\\node[operator] (q{}_{}) at ({},{}) {{H}} edge [-] (q{}_{});".format(idx, col, col*x, y*(-(idx-1)), idx, l[idx-1])
+					l[idx-1] = col
+				col+=1
+
 			if op == "T":
 				output = output + "\n% Column {}".format(col)
 
@@ -520,6 +605,33 @@ class Circ:
 
 				output = output + "\n\\draw[-]      (q{}_{}) -- (q{}_{});".format(idx1, col, idx2, col)
 				output = output + "\n\\draw[-]      (q{}_{}) -- (q{}_{});".format(idx2, col, idx3, col)
+
+				col+=1
+
+			if op == "c":
+				output = output + "\n% Column {}".format(col)
+
+				idx1, idx2 = arg[0], arg[1]
+
+				output = output + "\n\\node[bullet] (q{}_{}) at ({},{}) {{}} edge [-] (q{}_{});".format(idx1, col, col*x, y*(-(idx1-1)), idx1, l[idx1-1])
+				l[idx1-1] = col
+				output = output + "\n\\node[XOR]    (q{}_{}) at ({},{}) {{}} edge [-] (q{}_{});".format(idx2, col, col*x, y*(-(idx2-1)), idx2, l[idx2-1])
+				l[idx2-1] = col
+
+				output = output + "\n\\draw[-]      (q{}_{}) -- (q{}_{});".format(idx1, col, idx2, col)
+
+				col+=1
+			if op == "vGate":
+				output = output + "\n% Column {}".format(col)
+
+				idx1, idx2 = arg[0], arg[1]
+
+				output = output + "\n\\node[bullet] (q{}_{}) at ({},{}) {{}} edge [-] (q{}_{});".format(idx1, col, col*x, y*(-(idx1-1)), idx1, l[idx1-1])
+				l[idx1-1] = col
+				output = output + "\n\\node[V]    (q{}_{}) at ({},{}) {{}} edge [-] (q{}_{});".format(idx2, col, col*x, y*(-(idx2-1)), idx2, l[idx2-1])
+				l[idx2-1] = col
+
+				output = output + "\n\\draw[-]      (q{}_{}) -- (q{}_{});".format(idx1, col, idx2, col)
 
 				col+=1
 
@@ -549,8 +661,11 @@ class Circ:
 	def toLatex(self, expr):
 		formula = []
 		n_list = []
+
+		#print(expr)
 		for c in expr:
 			s = c.split(',')
+			#print(s)
 			if s[0] == "p":
 				n_list.append(s[1])
 			elif len(n_list) > 0:
@@ -560,4 +675,15 @@ class Circ:
 			if s[0] == "t":
 				j = ",".join(s[1:3])
 				formula.append("\\tof^{"+j+"}_{"+ s[3]+"}")
+			if s[0] == "h":
+				j = ",".join(s[1])
+				formula.append("h_{"+j+"}")
+			if s[0] == "c":
+				j = ",".join(s[1])
+				formula.append("c^{"+j+"}_{"+ s[2]+"}")	
+			if s[0] == "vGate":
+				j = ",".join(s[1])
+				formula.append("V^{"+j+"}_{"+ s[2]+"}")	
+			#print(formula)
+		
 		return (" \circ ".join(reversed(formula)))

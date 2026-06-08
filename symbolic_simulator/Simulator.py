@@ -80,11 +80,16 @@ class Simulator:
 					break
 			self.state.append(value)
 			self.resultState.append(0)
+		#print(inputQubits)
+		print(self.state)
 
 	def getGate(self, name):
 		return self.gates.getGate(name)
 	
 	def executeGate(self, gate, targetQubit, controlQubits = None, controlValues = None):
+		#print('TARGETS:', targetQubit)
+		#print('CONTROLS:', controlQubits)
+		#print('CONTROL VALUES:', controlValues)
 		posMask = 1 << targetQubit
 		nPosMask = ~posMask
 
@@ -148,7 +153,7 @@ class Simulator:
 		
 		if doPrint:
 			for m in range(0, totalMeasures):
-				print (numpy.binary_repr(m, numMeasureQubits), measureOutput[m])
+				print (numpy.binary_repr(m, numMeasureQubits)+":", measureOutput[m])
 
 		return measureOutput
 
@@ -168,13 +173,14 @@ class Simulator:
 					gate = self.getGate(gatesList[g])
 					targetQubit = int(gatesList[g+1])
 					self.executeGate(gate, targetQubit, controlQubits, controlValues)
-
 			else:				## normal gate
 				gatesList = step.split(",")
 				for g in range(0, len(gatesList), 2):
 					gate = self.getGate(gatesList[g])
 					targetQubit = int(gatesList[g+1])
 					self.executeGate(gate, targetQubit)
+			self.printNonZeroPosState()
+			print('#######')
 	
 	def printState(self):
 		for p in range (0, len(self.state)):
@@ -182,10 +188,10 @@ class Simulator:
 
 	def printPosState(self):
 		for p in range (0, len(self.state)):
-			print (numpy.binary_repr(p, self.numQubits), factor(self.state[p]))
+			print (numpy.binary_repr(p, self.numQubits) + ':', factor(self.state[p]))
 
 	def printNonZeroPosState(self):
 		for p in range (0, len(self.state)):
 			if self.state[p] != 0:
-				print (numpy.binary_repr(p, self.numQubits), factor(self.state[p]))
+				print (numpy.binary_repr(p, self.numQubits) + ':', factor(self.state[p]))
 	
