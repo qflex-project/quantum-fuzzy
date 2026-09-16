@@ -1,0 +1,30 @@
+LICENSE
+Declaração de Licença
+
+Este repositório e seus respectivos arquivos, códigos, documentos e demais materiais disponibilizados neste projeto são licenciados nos termos estabelecidos pelo respectivo titular dos direitos, observadas as condições e limitações descritas neste documento.
+
+A presente licença e a disponibilização deste projeto fazem referência ao registro BR512026001162-0, publicado na Revista da Propriedade Industrial Nº 2878, de 03 de Março de 2026.
+
+A documentação relacionada ao referido registro pode ser consultada em:
+
+https://revistas.inpi.gov.br/pdf/Programa_de_computador2878.pdf
+Direitos e utilização
+
+Salvo disposição expressa em contrário neste arquivo ou na documentação vinculada ao registro mencionado acima, nenhum direito adicional é concedido sobre elementos protegidos por direitos de propriedade intelectual de terceiros.
+
+A utilização, reprodução, modificação, distribuição ou disponibilização deste projeto deverá respeitar:
+
+    os direitos autorais e demais direitos de propriedade intelectual aplicáveis;
+
+    as condições estabelecidas nesta licença;
+
+    os direitos de terceiros eventualmente incorporados ao projeto; 
+    
+    e a legislação aplicável.
+
+Referência documental
+
+Nome: qFuzzyAnalyzer
+Registro: BR512026001162-0
+Publicação: Revista da Propriedade Industrial (RPI) nº 2878
+Data: 03 de Março de 2026
